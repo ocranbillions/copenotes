@@ -2,10 +2,10 @@
   "name": "copenotes",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "lint": "eslint ./src/ --ext .js --fix"
+    "lint": "eslint ./src/ --ext .js --fix",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
