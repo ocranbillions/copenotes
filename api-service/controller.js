@@ -1,5 +1,5 @@
 const User = require('../database/models/User');
-const mailer = require('../mailer');
+const sendEmail = require('../mailer');
 
 const controller = async (req, res, next) => {
   try {
@@ -7,14 +7,14 @@ const controller = async (req, res, next) => {
 
     await User.create(email);
 
-    const message = {
+    const welcomeMessage = {
       title: 'Welcome to Cope Notes',
       content: 'You have successfully subscribed to Cope Notes, A new message will be sent to your email every minute',
     };
 
-    mailer(email, message);
+    sendEmail(email, welcomeMessage);
 
-    return res.send('Welcome to Cope Notes');
+    return res.send(welcomeMessage.content);
   } catch (error) {
     return next(error);
   }

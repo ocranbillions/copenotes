@@ -42,16 +42,16 @@ const seedMessagesTable = async () => {
       INSERT INTO messages 
         (id, title, content)
       VALUES 
-        (1, 'Title1', 'message1'), 
-        (2, 'Title2', 'message2'), 
-        (3, 'Title3', 'message3'),
-        (4, 'Title4', 'message4'),
-        (5, 'Title5', 'message5'),
-        (6, 'Title6', 'message6'),
-        (7, 'Title7', 'message7'),
-        (8, 'Title8', 'message8'),
-        (9, 'Title9', 'message9'),
-        (10, 'Title10', 'message10');
+        (1, 'New Message - ID1', "We never know the quality of someone else's life, though we seldom resist the temptation to assume and pass judgement."), 
+        (2, 'New Message - ID2', "Death twitches my ear;'Live,' he says... 'I'm coming."), 
+        (3, 'New Message - ID3', "You lose nothing when fighting for a cause ... In my mind the losers are those who don't have a cause they care about."),
+        (4, 'New Message - ID4', "When I let go of what I am, I become what I might be."),
+        (5, 'New Message - ID5', "Remake the world, a little at a time, each in your own corner of the world."),
+        (6, 'New Message - ID6', "Be with someone who inspires you and makes you be the best version of yourself."),
+        (7, 'New Message - ID7', "If we ever forget that we're one nation under God, then we will be one nation gone under."),
+        (8, 'New Message - ID8', "For the world is in a bad state, but everything will become still worse unless each of us does his best."),
+        (9, 'New Message - ID9', "that as long as we are being remembered, we remain alive."),
+        (10, 'New Message - ID10', "Don't let the bastards grind you down.");
     `,
   );
 };

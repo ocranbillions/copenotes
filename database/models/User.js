@@ -1,11 +1,7 @@
 const db = require('../index');
 
 class User {
-  // constructor(email) {
-  //   this.email = email;
-  //   this.hasReceivedAllMessages = false;
-  //   this.messagesReceived = [];
-  // }
+  // constructor() {}
 
   static async create(email) {
     const result = await db.query(
@@ -45,7 +41,7 @@ class User {
     return result;
   }
 
-  static async updateReceivedMessages(user, messageId, TOTAL_MESSAGES) {
+  static async addToReceivedMessages(user, messageId, TOTAL_MESSAGES) {
     const messagesReceived = user.messagesReceived
       ? [messageId, ...JSON.parse(user.messagesReceived)] : [messageId];
 
