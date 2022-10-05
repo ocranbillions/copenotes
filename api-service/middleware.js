@@ -1,4 +1,4 @@
-const { getUserByEmail } = require('./database');
+const User = require('../database/models/User');
 
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
@@ -8,7 +8,7 @@ const validateEmail = async (req, res, next) => {
     return res.status(400).json({ message: 'Please submit a vaild email' });
   }
 
-  const user = await getUserByEmail(email);
+  const [user] = await User.find(email.trim().toLowerCase());
 
   if (user) {
     return res.status(409).json({ message: 'Email already in use' });

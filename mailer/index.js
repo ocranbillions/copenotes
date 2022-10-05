@@ -10,16 +10,14 @@ const mailer = async (toEmail, message) => {
   });
 
   const info = await transporter.sendMail({
-    from: '"Cope Notes" <sammiestt@gmail.com>',
+    from: `"Cope Notes" <${process.env.GOOGLE_EMAIL}>`,
     to: toEmail,
     subject: message.title,
     html: `<div>${message.content}</div>`,
   });
-
-  console.log('Message sent: ', info.messageId);
+  console.log('Message sent: ', info.response);
 
   return 'Ok';
 };
 
-// export default mailer;
 module.exports = mailer;
