@@ -1,0 +1,5 @@
+{
+  "name": "CopeNotes: Email scheduler api",
+  "version": "0.3.0",
+  "description": "Subscribe to receive random messages every minute"
+}

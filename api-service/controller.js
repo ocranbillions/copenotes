@@ -14,7 +14,7 @@ const controller = async (req, res, next) => {
 
     sendEmail(email, welcomeMessage);
 
-    return res.send(welcomeMessage.content);
+    return res.status(201).json({ message: welcomeMessage.content });
   } catch (error) {
     return next(error);
   }

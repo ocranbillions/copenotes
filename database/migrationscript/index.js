@@ -30,8 +30,8 @@ const seedUsersTable = async () => {
       INSERT INTO users 
         (email, messagesReceived, hasReceivedAllMessages)
       VALUES 
-        ('ocran.aws@gmail.com', '[1, 3, 4, 9, 10, 6]', false), 
-        ('test@user.com', '[1, 3, 4, 2, 10, 9, 6, 7, 8, 5]', true);
+        ('sammiestt@gmail.com', '[1, 3, 4, 9, 10, 6]', false), 
+        ('sampleUser@user.com', '[1, 3, 4, 2, 10, 9, 6, 7, 8, 5]', true);
     `,
   );
 };
