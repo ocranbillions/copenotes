@@ -56,10 +56,16 @@ const seedMessagesTable = async () => {
   );
 };
 
+const dropUsersTable = async () => db.query('DROP TABLE IF EXISTS users;');
+const dropMessagesTable = async () => db.query('DROP TABLE IF EXISTS messages;');
+
 (async () => {
   try {
-    await createUserTable();
+    await dropMessagesTable();
+    await dropUsersTable();
+
     await createMessageTable();
+    await createUserTable();
     await seedUsersTable();
     await seedMessagesTable();
   } catch (error) {
