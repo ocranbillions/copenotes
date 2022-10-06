@@ -43,7 +43,7 @@ class User {
 
   static async addToReceivedMessages(user, messageId, TOTAL_MESSAGES) {
     const messagesReceived = user.messagesReceived
-      ? [messageId, ...JSON.parse(user.messagesReceived)] : [messageId];
+      ? [...JSON.parse(user.messagesReceived), messageId] : [messageId];
 
     const hasReceivedAllMessages = messagesReceived.length === TOTAL_MESSAGES ? 1 : 0;
     const result = await db.query(
