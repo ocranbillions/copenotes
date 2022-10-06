@@ -15,8 +15,8 @@ const randomMessageJob = async () => {
     const EMAIL_SUCCESS_CODE = '250';
 
     users.forEach(async (user) => {
-      const messagesReceived = user.messagesReceived ? [...JSON.parse(user.messagesReceived)] : [];
-      const randomMessageId = getRandomMessageId(messagesReceived, NUM_OF_MESSAGES);
+      const messageIds = user.messagesReceived ? [...JSON.parse(user.messagesReceived)] : [];
+      const randomMessageId = getRandomMessageId(messageIds, NUM_OF_MESSAGES);
       const [message] = await Message.getMessageById(randomMessageId);
 
       const response = await sendEmail(user.email, message);
@@ -25,9 +25,9 @@ const randomMessageJob = async () => {
       if (messageSent) {
         console.log(`Message sent to ${user.email}\n\n`);
 
-        const updatedMessageIds = [...messagesReceived, message.id];
+        const updatedMessageIds = [...messageIds, message.id];
         const hasReceivedAllMessages = updatedMessageIds.length === NUM_OF_MESSAGES ? 1 : 0;
-        User.addToReceivedMessages(user.id, updatedMessageIds, hasReceivedAllMessages);
+        User.updateReceivedMessages(user.id, updatedMessageIds, hasReceivedAllMessages);
       }
     });
   } catch (error) {

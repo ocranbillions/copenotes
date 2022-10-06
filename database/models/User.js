@@ -41,7 +41,7 @@ class User {
     return result;
   }
 
-  static async addToReceivedMessages(userId, updatedMessageIds, hasReceivedAllMessages) {
+  static async updateReceivedMessages(userId, updatedMessageIds, hasReceivedAllMessages) {
     const result = await db.query(
       `
       UPDATE
