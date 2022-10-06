@@ -8,24 +8,26 @@ const Message = require('../database/models/Message');
 const sendEmail = require('../mailer');
 const { getRandomMessageId } = require('./randomIdGenerator');
 
-const EMAIL_SUCCESS_CODE = '250';
-
 const randomMessageJob = async () => {
   try {
     const users = await User.getAllUsersWhoShouldStillReceiveMessages();
-
-    const TOTAL_MESSAGES = (await Message.getAll()).length;
+    const NUM_OF_MESSAGES = (await Message.getAll()).length;
+    const EMAIL_SUCCESS_CODE = '250';
 
     users.forEach(async (user) => {
-      const randomMessageId = getRandomMessageId(user, TOTAL_MESSAGES);
+      const messagesReceived = user.messagesReceived ? [...JSON.parse(user.messagesReceived)] : [];
+      const randomMessageId = getRandomMessageId(messagesReceived, NUM_OF_MESSAGES);
       const [message] = await Message.getMessageById(randomMessageId);
 
       const response = await sendEmail(user.email, message);
 
       const messageSent = response.slice(0, 3) === EMAIL_SUCCESS_CODE;
       if (messageSent) {
-        console.log(`Message sent to ${user.email}`);
-        User.addToReceivedMessages(user, randomMessageId, TOTAL_MESSAGES);
+        console.log(`Message sent to ${user.email}\n\n`);
+
+        const updatedMessageIds = [...messagesReceived, message.id];
+        const hasReceivedAllMessages = updatedMessageIds.length === NUM_OF_MESSAGES ? 1 : 0;
+        User.addToReceivedMessages(user.id, updatedMessageIds, hasReceivedAllMessages);
       }
     });
   } catch (error) {

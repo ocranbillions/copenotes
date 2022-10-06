@@ -1,9 +1,7 @@
-const getRandomMessageId = (user, MAX_VALUE) => {
-  const messagesReceived = user.messagesReceived ? [...JSON.parse(user.messagesReceived)] : [];
-
+const getRandomMessageId = (messagesReceived, MAX_VALUE) => {
   const randomNum = Math.floor(Math.random() * MAX_VALUE) + 1;
   if (messagesReceived.includes(randomNum)) {
-    return getRandomMessageId(user, MAX_VALUE);
+    return getRandomMessageId(messagesReceived, MAX_VALUE);
   }
   return randomNum;
 };

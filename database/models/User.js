@@ -41,20 +41,16 @@ class User {
     return result;
   }
 
-  static async addToReceivedMessages(user, messageId, TOTAL_MESSAGES) {
-    const messagesReceived = user.messagesReceived
-      ? [...JSON.parse(user.messagesReceived), messageId] : [messageId];
-
-    const hasReceivedAllMessages = messagesReceived.length === TOTAL_MESSAGES ? 1 : 0;
+  static async addToReceivedMessages(userId, updatedMessageIds, hasReceivedAllMessages) {
     const result = await db.query(
       `
       UPDATE
         users
       SET
-        messagesReceived = '${JSON.stringify(messagesReceived)}',
+        messagesReceived = '${JSON.stringify(updatedMessageIds)}',
         hasReceivedAllMessages = '${hasReceivedAllMessages}'
       WHERE
-        id = '${user.id}'
+        id = '${userId}'
       `,
     );
     return result;
