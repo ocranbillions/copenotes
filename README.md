@@ -27,7 +27,7 @@ To setup locally, you'll need the following:
 
 
 ## Creating a Google Password for the APP
-To get an app specific password from google, visit https://myaccount.google.com/security and follow the screenshots below
+I have provided a google password below if you'd like to setup quickly. Otherwise you can get your Google App specific password by visiting https://myaccount.google.com/security and follow the screenshots below
 
 Select `App Passwords`
 <img width="919" alt="Screenshot 2022-10-06 at 09 06 59" src="https://user-images.githubusercontent.com/20531075/194289273-5d047298-2cd0-4c0a-b5d1-f847f9f90929.png">
@@ -52,7 +52,7 @@ DATABASE_PASSWORD=e2199dfe
 GOOGLE_EMAIL=ocrantestuser007@gmail.com
 APP_SPECIFIC_PASSWORD=vremkmaweipfzvpe
 ```
-The MySql and Google credentials above were created to ease your setup, use them if you want to ignore creating your own database and google app password. Note that it will only be valid for a couple of days.
+The MySql and Google credentials above were created to ease your setup, use them if you want to ignore creating your own database and google app password. Note that it will only be available until this project is assessed.
 
 
 
@@ -61,10 +61,9 @@ The MySql and Google credentials above were created to ease your setup, use them
 You can start the app once you have updated the values in the `.env` file with valid credentials
 1. First you need to prepare the database. Run `npm run db:migrate` to generate the database tables and seed some sample data.
 2. Start the app with `npm start`. This command generates the api documentation which can be accessed at localhost:5000/docs. 
-3. Access the docs at `http://localhost:5000/docs`
-    > Note that you must change `https://copenotes.herokuapp.com` in `api-service/router.js line 10 and 33` to `http://localhost:5000` to have requests at `http://localhost:5000/docs` work successfully. This should be done before the `npm start` command
-4. If you would like to access the endpoint directly without using the docs; send a post request with your `email` to `http://localhost:5000/subscribe` 
-5. If you choose to `npm run dev` server. You'll need to manually run the `generate:apidoc` command in a separate terminal to generate the docs. 
+    > Note that you must change hostname in api-service/router.js line 10 and 33 to locahost:5000 to have requests at http://localhost:5000/docs work successfully. Eg https://copenotes.herokuapp.com/subscribe should be changed to http://localhost:5000/subscribe . This should be done before the `npm start` command to enable apiDoc.js regenerate the docs.
+3. If you would like to access the endpoint directly without using the docs; send a post request with your `email` to http://localhost:5000/subscribe 
+4. If you choose to `npm run dev` server. You'll need to manually run the `generate:apidoc` command in a separate terminal to generate the docs. 
 
 
 The start command starts the api server and the task scheduler as two separate services. You can choose to start these sevices with separate commands if you so wish. The `dev:server` and `dev:scheduler` commands have been created for this purpose.
