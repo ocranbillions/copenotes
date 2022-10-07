@@ -16,16 +16,14 @@ class Message {
   }
 
   static async getMessageById(id) {
-    const result = await db.query(
-      `
+    const result = await db.query(`
         SELECT
           *
         FROM
           messages
         WHERE
-          id = '${id}';
-      `,
-    );
+          id = ?;
+      `, [id]);
     return result;
   }
 }

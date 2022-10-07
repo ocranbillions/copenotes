@@ -4,26 +4,23 @@ class User {
   // constructor() {}
 
   static async create(email) {
-    const result = await db.query(
-      `INSERT INTO users (email, messagesReceived, hasReceivedAllMessages)
-        VALUES ('${email.trim().toLowerCase()}', '[]', 0)
-      `,
-    );
+    const result = await db.query(`
+        INSERT INTO users (email, messagesReceived, hasReceivedAllMessages)
+        VALUES (?, ?, ?)
+      `, [email.trim().toLowerCase(), '[]', 0]);
 
     return result;
   }
 
   static async find(email) {
-    const result = await db.query(
-      `
+    const result = await db.query(`
         SELECT
           *
         FROM
           users
         WHERE
-          email = '${email.trim().toLowerCase()}';
-      `,
-    );
+          email = ?;
+      `, [email.trim().toLowerCase()]);
     return result;
   }
 
@@ -42,17 +39,15 @@ class User {
   }
 
   static async updateReceivedMessages(userId, updatedMessageIds, hasReceivedAllMessages) {
-    const result = await db.query(
-      `
+    const result = await db.query(`
       UPDATE
         users
       SET
-        messagesReceived = '${JSON.stringify(updatedMessageIds)}',
-        hasReceivedAllMessages = '${hasReceivedAllMessages}'
+        messagesReceived = ?,
+        hasReceivedAllMessages = ?
       WHERE
-        id = '${userId}'
-      `,
-    );
+        id = ?
+      `, [JSON.stringify(updatedMessageIds), hasReceivedAllMessages, userId]);
     return result;
   }
 }
